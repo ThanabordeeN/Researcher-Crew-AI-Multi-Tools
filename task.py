@@ -25,7 +25,7 @@ class CustomTasks:
             * Maintaining a clear and engaging writing style
             """
             ),
-            expected_output="A concise summary in the following format: * 'The report is about...'  [1-2 sentences summarizing the focus] * 'The report concludes that...' [1-2 sentences on key takeaways] ",
+            expected_output="A summary with atleast 1 paragraph ",
             agent=agent
         )
     
