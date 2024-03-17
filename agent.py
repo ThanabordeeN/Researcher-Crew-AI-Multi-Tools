@@ -8,7 +8,6 @@ class Resercher :
         self.search = self.tool_list.search_tool()
         self.arxiv = self.tool_list.arxiv_tool()
         self.wiki = self.tool_list.wikipedia_tool()
-       
     def researcher(self) :
         return Agent(
             role='Senior Research Analyst',
