@@ -3,7 +3,7 @@ from langchain_community.llms import Ollama
 from tools import Tools
 class Resercher :
     def __init__(self) -> None:
-        self.llm = Ollama(model="mistral",temperature=0)
+        self.mistral = Ollama(model="mistral",temperature=0)
         self.tool_list = Tools()
         self.search = self.tool_list.search_tool()
         self.arxiv = self.tool_list.arxiv_tool()
@@ -11,25 +11,29 @@ class Resercher :
     def researcher(self) :
         return Agent(
             role='Senior Research Analyst',
-            goal='Summarize the research papers and data to provide actionable insights of purpose',
-            backstory="""You work at a leading technology research institute.
-            You are a researcher with the ability to read research papers at leading universities.
-            You very strict abut data so your research base on true data and research paper by using tools.
-            You have a unique ability to break down complex data and present actionable insights.""",
-            verbose=True,
+            goal='Analyze and synthesize research papers and complex data sets, extracting key findings and implications. Present insights in a clear, concise format, highlighting actionable recommendations for stakeholders',
+            backstory="""Thoroughly analyze the topic of [Purpose]. Gather the most relevant research papers and data, prioritizing reputable sources and recent publications. Provide a comprehensive report with:
+                        * Key findings and insights directly related to [Purpose]
+                        * Actionable recommendations or implications
+                        * **Critical analysis of the conclusions presented in the research. Identify strengths, weaknesses, potential biases, and areas for further exploration.**
+                        * Clear citations of all research papers and datasets used """,
+            verbose=False,
             allow_delegation=False,
             tools=[self.search, self.arxiv, self.wiki],
-            llm=self.llm
+            llm=self.mistral,
+            max_iter=30,
             )
     def writer(self) :
         return Agent(
             role='Tech Content Strategist',
-            goal='summary content from the Senior Research Analyst for easy reading and understanding without using any tools.',
-            backstory="""You are a renowned Content Strategist, known for your insightful and engaging articles.
-            You transform complex concepts into compelling narratives.""",
-            verbose=True,
-            allow_delegation=True,
+            goal='Translate technical research summaries into engaging and digestible content for a general audience. Explain complex concepts clearly, using relatable examples and storytelling techniques.',
+            backstory="""You are a skilled communicator with a deep understanding of technology and a passion for 
+            making complex concepts accessible. Your experience in technical writing and 
+            content strategy  enables you to transform intricate research into compelling and informative content.""",
+            verbose=False,
+            allow_delegation=False,
             tools=[],
-            llm=self.llm
+            llm=self.mistral,
+            max_iter=30,
             )
     #add more agents here
