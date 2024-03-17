@@ -3,7 +3,7 @@ from langchain_community.llms import Ollama
 from tools import Tools
 class Resercher :
     def __init__(self) -> None:
-        self.mistral = Ollama(model="mistral",temperature=0)
+        self.mistral = Ollama(model="mistral" , temperature=0.1)
         self.tool_list = Tools()
         self.search = self.tool_list.search_tool()
         self.arxiv = self.tool_list.arxiv_tool()
@@ -16,8 +16,9 @@ class Resercher :
                         * Key findings and insights directly related to [Purpose]
                         * Actionable recommendations or implications
                         * **Critical analysis of the conclusions presented in the research. Identify strengths, weaknesses, potential biases, and areas for further exploration.**
-                        * Clear citations of all research papers and datasets used """,
-            verbose=False,
+                        * Clear citations of all research papers and datasets used
+                        * Cross check the information with the various tools provided""",
+            verbose=True,
             allow_delegation=False,
             tools=[self.search, self.arxiv, self.wiki],
             llm=self.mistral,
@@ -25,7 +26,7 @@ class Resercher :
             )
     def writer(self) :
         return Agent(
-            role='Tech Content Strategist',
+            role='Content Strategist',
             goal='Translate technical research summaries into engaging and digestible content for a general audience. Explain complex concepts clearly, using relatable examples and storytelling techniques.',
             backstory="""You are a skilled communicator with a deep understanding of technology and a passion for 
             making complex concepts accessible. Your experience in technical writing and 
