@@ -1,6 +1,6 @@
 # Researcher-Crew-AI-Multi-Tools 🤖🔧
 ## Project Overview 🌟
-The Researcher-Crew-AI-Multi-Tools project is an experimental initiative aimed at creating a versatile AI crew 🚀, equipped with a suite of tools 🛠️ to facilitate research and analysis. Leveraging the combined capabilities of CrewAI and Langchaine, the project utilizes LocalModels such as Mistral:7B, published with Ollama, to delve into topics provided by users.
+The Researcher-Crew-AI-Multi-Tools project is an experimental initiative aimed at creating a versatile AI crew 🚀, equipped with a suite of tools 🛠️ to facilitate research and analysis. Leveraging the combined capabilities of CrewAI and Langchaine, the project utilizes LocalModels such as openhermes , published with Ollama, to delve into topics provided by users.
 
 ## Features 📋
 - **CrewAI Integration**: Harnessing the power of CrewAI to perform complex tasks and provide insightful analysis 🧠.
@@ -10,10 +10,15 @@ The Researcher-Crew-AI-Multi-Tools project is an experimental initiative aimed a
 
 ## Getting Started 🚀
 To begin using the Researcher-Crew-AI-Multi-Tools, follow these steps:
-1. Clone the repository to your local machine 🖥️.
-2. Install the required dependencies 📥.
-3. Configure the LocalModels and APIs according to the documentation 📄.
-4. Run the application and input your research query 🧐.
+1. Install Ollama.
+2. Pull Model
+   ```bash
+   ollama pull openhermes
+   ```
+4. Clone the repository to your local machine 🖥️.
+5. Install the required dependencies 📥.
+6. Configure the LocalModels and APIs according to the documentation 📄.
+7. Run the application and input your research query 🧐.
 
 ### Running the Application 🏃‍♂️
 To run the application, execute the following command in your terminal:
