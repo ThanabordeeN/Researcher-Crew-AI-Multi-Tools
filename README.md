@@ -6,7 +6,7 @@ The Researcher-Crew-AI-Multi-Tools project is an experimental initiative aimed a
 - **CrewAI Integration**: Harnessing the power of CrewAI to perform complex tasks and provide insightful analysis 🧠.
 - **Langchaine Technology**: Utilizing Langchaine for advanced language processing and understanding 📚.
 - **LocalModels Deployment**: Employing LocalModels like Openhermes for specialized functions, made accessible through Ollama's publishing platform 🌐.
-- **Research Tools**: Incorporating tools such as Wikipedia, Arxiv, and DuckDuckGo's Free API for comprehensive topic research and data gathering 🔍.
+- **Research Tools**: Incorporating tools such as **Wikipedia**,**Arxiv** and **DuckDuckGo** for comprehensive topic research and data gathering 🔍.
 
 ## Getting Started 🚀
 To begin using the Researcher-Crew-AI-Multi-Tools, follow these steps:
