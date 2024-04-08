@@ -3,25 +3,19 @@ from langchain_community.llms import Ollama
 from tools import Tools
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import AgentType, initialize_agent, load_tools
-from crewai_tools import DirectorySearchTool , PDFSearchTool,TXTSearchTool,CSVSearchTool ,JSONSearchTool ,DOCXSearchTool ,MDXSearchTool,WebsiteSearchTool
-from crewai_tools.tools import XMLSearchTool
-import os
 import dotenv
 # This is the main class that you will use to define your custom crew.
 dotenv.load_dotenv()
 class Resercher :
     def __init__(self) -> None:
-        self.mistral = Ollama(model="openhermes",temperature=0.1)
-        #self.mistral = ChatGoogleGenerativeAI(model="gemini-1.0-pro",temperature=0.5)
+        self.llm = Ollama(model="Noun-Hermes-2:latest",temperature=0.1)
+        #self.llm = ChatGoogleGenerativeAI(model="gemini-1.0-pro",temperature=0.1)
         #self.human_tools = load_tools(["human"])
         self.tool_list = Tools()
         self.search = self.tool_list.search_tool()
         self.arxiv = self.tool_list.arxiv_tool()
         self.wiki = self.tool_list.wikipedia_tool()
-        self.crewAI_tools = [DirectorySearchTool(".data/"),PDFSearchTool(),TXTSearchTool(),CSVSearchTool() ,JSONSearchTool() ,DOCXSearchTool() ,MDXSearchTool(),WebsiteSearchTool(),XMLSearchTool()]
-    
-    
-    
+
     def data_searcher(self) :
         return Agent(
             role='Data Query Specialist',
@@ -31,8 +25,8 @@ class Resercher :
                 """,
             verbose=True,
             allow_delegation=False,
-            tools=self.crewAI_tools,
-            llm=self.mistral)
+            tools=[self.search, self.arxiv, self.wiki],
+            llm=self.llm)
     
     def researcher(self) :
         return Agent(
@@ -47,9 +41,8 @@ class Resercher :
             Related Information Instead and Analysis Relation: If there is no information available in the tools provided regarding [Purpose], this section will require you to seek out related information and analyze the relationship between that data and [Purpose]. This may involve examining adjacent disciplines or fields, with an eye toward identifying potential insights or connections that can help us better understand [Purpose].""",
             verbose=True,
             allow_delegation=False,
-            tools=[self.search, self.arxiv, self.wiki],
-            llm=self.mistral,
-            max_iter=30,
+            llm=self.llm,
+            max_iter=5,
             )
 
     def writer(self) :
@@ -66,7 +59,7 @@ class Resercher :
             verbose=True,
             allow_delegation=False,
             tools=[],
-            llm=self.mistral,
-            max_iter=30,
+            llm=self.llm,
+            max_iter=5,
             )
     #add more agents here

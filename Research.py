@@ -12,8 +12,8 @@ os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
 class CustomCrew:
     def __init__(self, Purpuse): 
         self.input = Purpuse
-        #self.gemini = ChatGoogleGenerativeAI(model="gemini-1.0-pro",temperature=0.5)
-        self.mistral = Ollama(model="openhermes",temperature=0.1)
+        self.gemini = ChatGoogleGenerativeAI(model="gemini-1.0-pro",temperature=0.5)
+        #self.mistral = Ollama(model="openhermes",temperature=0.1)
     def run(self):
         # Define your custom agents and tasks in agents.py and tasks.py
         agents = Resercher()
@@ -39,11 +39,13 @@ class CustomCrew:
             tasks=[Data_Research,Analyze,Content_create],
             verbose=2,
             process=Process.hierarchical,
-            manager_llm=self.mistral
+            manager_llm=self.gemini,
+            memory=False,
+            #embedder={"provider": "google"}
         )
         result = crew.kickoff()
         return result
-# This is the main function that you will use to run your custom crew.
+    
 if __name__ == "__main__":
     print("## Welcome to Researcher AI")
     print("-------------------------------")
